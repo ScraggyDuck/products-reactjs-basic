@@ -9,7 +9,7 @@ var initialState  = [
         inventory: 10
     },
     {
-        id: 1,
+        id: 2,
         name: 'Samsung galaxy S7',
         image: 'https://cdn.fptshop.com.vn/Uploads/Originals/2016/2/23/635918156584359185_s7-g1.jpg',
         rating: 4,
@@ -18,7 +18,7 @@ var initialState  = [
         inventory: 15
     },
     {
-        id: 1,
+        id: 3,
         name: 'Xiaomi note 4S',
         image: 'https://cdn.tgdd.vn/Products/Images/42/84905/xiaomi-redmi-note-4-1-400x460.png',
         rating: 5,
