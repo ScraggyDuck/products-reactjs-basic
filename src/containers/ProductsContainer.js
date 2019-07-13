@@ -3,6 +3,7 @@ import Products from '../components/Products';
 import Product from "../components/Product";
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
+import { addToCart } from '../actions/index';
 
 class ProductsContainer extends Component {
     render() {
@@ -13,13 +14,13 @@ class ProductsContainer extends Component {
             </Products>
         );
     }
-    
+
     showProducts = (products) => {
         var elmProducts = [];
-        if(products){
+        if (products) {
             elmProducts = products.map(
                 product => {
-                    return <Product key={ product.id } product={ product }/>
+                    return <Product key={product.id} product={product} onAddToCart={this.props.onAddToCart} />
                 }
             );
         }
@@ -45,4 +46,8 @@ const mapStateToProps = state => ({
     products: state.products
 });
 
-export default connect(mapStateToProps, null)(ProductsContainer);
+const mapDispatchToProps = dispatch => ({
+    onAddToCart: product => dispatch(addToCart(product))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductsContainer);

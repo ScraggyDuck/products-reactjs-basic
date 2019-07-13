@@ -16,11 +16,12 @@ class CartContainer extends Component {
             </Cart>
         );
     }
+
     showCartItem = cart => {
         var result = Message.MSG_CART_EMPTY;
-        if(cart.length > 0){
+        if (cart.length > 0) {
             result = cart.map((item, index) => {
-                return <CartItem key={index} item={item} index={index}/>
+                return <CartItem key={index} item={item} index={index} />
             });
         }
         return result;
@@ -28,7 +29,7 @@ class CartContainer extends Component {
 
     showTotalAmount = cart => {
         var result = null;
-        if(cart.length > 0){
+        if (cart.length > 0) {
             result = <CartResult cart={cart} />;
         }
         return result;
@@ -55,5 +56,6 @@ CartContainer.propTypes = {
 const mapStateToProps = state => ({
     cart: state.cart
 });
+
 
 export default connect(mapStateToProps, null)(CartContainer);

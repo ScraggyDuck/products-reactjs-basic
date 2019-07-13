@@ -29,13 +29,40 @@ var initialState = [
 ];
 
 const cart = (state = initialState, action) => {
+    var index = -1;
+    var {product} = action;
     switch (action.type) {
         case types.ADD_TO_CART:
-            console.log(action);
-            return state;
+            index = findIndex(state, product);
+            var result = [...state];
+            if(index !== -1){
+                result[index] = {
+                    ...result[index],
+                    quantity: result[index].quantity + 1
+                }
+            }
+            else {
+                result.push({
+                    product,
+                    quantity: 1
+                });
+            }
+            return result;
         default:
             return state;
     }
 };
+
+var findIndex = (cart, product) => {
+    var index = -1;
+    if(cart.length > 0){
+        for(var i = 0; i < cart.length; i++)
+            if( cart[i].product.id === product.id){
+                index = i;
+                break;
+            }
+    }
+    return index;
+}
 
 export default cart;
