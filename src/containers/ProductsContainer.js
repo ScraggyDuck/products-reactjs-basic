@@ -36,7 +36,7 @@ ProductsContainer.propTypes = {
             image: PropTypes.string.isRequired,
             price: PropTypes.number.isRequired,
             rating: PropTypes.number.isRequired,
-            inventory: PropTypes.number.isRequired,
+            inventory: PropTypes.number.isRequired
         })
     ).isRequired
 };
