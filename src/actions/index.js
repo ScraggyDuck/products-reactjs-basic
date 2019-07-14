@@ -5,3 +5,8 @@ export const addToCart = (product, quantity) => ({
     product,
     quantity
 });
+
+export const changeMessage = message => ({
+    type: types.CHANGE_MESSAGE,
+    message
+});
