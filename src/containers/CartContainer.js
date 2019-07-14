@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
-import { connect } from "react-redux";
 import PropTypes from 'prop-types';
+
 import Cart from '../components/Cart';
 import CartItem from '../components/CartItem';
-import * as Message from '../constants/Message';
 import CartResult from '../components/CartResult';
+
+import * as Message from '../constants/Message';
+
+import { deleteProductInCart, updateProductInCart, changeMessage } from '../actions/index';
+import { connect } from "react-redux";
+
+
 
 class CartContainer extends Component {
     render() {
@@ -18,10 +24,17 @@ class CartContainer extends Component {
     }
 
     showCartItem = cart => {
-        var result = Message.MSG_CART_EMPTY;
+        var result = <tr><td>{Message.MSG_CART_EMPTY}</td></tr>;
         if (cart.length > 0) {
             result = cart.map((item, index) => {
-                return <CartItem key={index} item={item} index={index} />
+                return <CartItem
+                    key={index}
+                    item={item}
+                    index={index}
+                    onDeleteProductInCart={this.props.onDeleteProductInCart}
+                    onUpdateCartItem={this.props.onUpdateCartItem}
+                    onChangeMessage={this.props.onChangeMessage}
+                />
             });
         }
         return result;
@@ -50,12 +63,19 @@ CartContainer.propTypes = {
             }),
             quantity: PropTypes.number.isRequired
         })
-    ).isRequired
+    ).isRequired,
+    onDeleteProductInCart: PropTypes.func.isRequired,
+    onUpdateCartItem: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
     cart: state.cart
 });
 
+const mapDispatchToProps = dispatch => ({
+    onDeleteProductInCart: product => dispatch(deleteProductInCart(product)),
+    onUpdateCartItem: (product, quantity) => dispatch(updateProductInCart(product, quantity)),
+    onChangeMessage: message => dispatch(changeMessage(message))
+});
 
-export default connect(mapStateToProps, null)(CartContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(CartContainer);
